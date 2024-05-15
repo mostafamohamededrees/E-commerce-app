@@ -5,6 +5,6 @@ User,
  "createdAt" | "updateAt" | "emailVerified"
  >& {
   createdAt: string ;
-  updateAt: string ;
+  updateAt: string| undefined   ;
   emailVerified: string | null;
  }
