@@ -72,7 +72,7 @@ const AddProductForm = () => {
       setImages(null);
       setIsProductCreated(false);
     }
-  }, [isProductCreated]);
+  }, [isProductCreated, reset]);
 
   const category = watch("category");
 
