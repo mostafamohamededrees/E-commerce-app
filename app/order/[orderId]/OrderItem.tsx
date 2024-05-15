@@ -18,7 +18,8 @@ const OrderItem: React.FC<OrderItemProps> = ({ item }) => {
             src={item.selectedImage.image}
             alt={item.name}
             fill
-          />
+            sizes="100vw" // Add this line
+            />
         </div>
         <div className="flex flex-col gap-1">
           <div>{truncateText(item.name)}</div>

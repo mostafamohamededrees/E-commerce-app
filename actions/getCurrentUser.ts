@@ -20,7 +20,7 @@ export async function getCurrentUser() {
 
       include: {
         orders: true,
-      }
+      },
     });
 
     if (!currentUser) {
@@ -30,7 +30,7 @@ export async function getCurrentUser() {
     return {
       ...currentUser,
       createdAt: currentUser.createdAt.toISOString(),
-      updateAt: currentUser.updateAt.toISOString(),
+      updatedAt: currentUser.updateAt?.toISOString(),
       emailVerified: currentUser.emailVerified?.toISOString() || null,
     };
   } catch (error: any) {

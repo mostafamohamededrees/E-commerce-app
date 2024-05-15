@@ -30,11 +30,12 @@ const ProductCard: React.FC<ProductCardProps> = ({ data }) => {
       <div className="flex flex-col gap-1 items-center w-full  ">
         <div className="aspect-square overflow-hidden relative w-full ">
           <Image
+            className="w-full h-full object-contain"
             src={data.images[0].image}
             alt={data.name}
             fill
             objectFit="contain"
-            className="w-full h-full object-contain"
+            sizes="100vw" // Add this line
           />
         </div>
         <div className="mt-4">{truncateText(data.name)}</div>

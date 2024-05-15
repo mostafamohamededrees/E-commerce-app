@@ -16,7 +16,6 @@ const ItemContent: React.FC<ItemContentProps> = ({ item }) => {
     handleRemoveProductFromCart,
     handleCartQtyIncrease,
     handleCartQtyDecrease,
-    
   } = useCart();
 
   return (
@@ -25,10 +24,11 @@ const ItemContent: React.FC<ItemContentProps> = ({ item }) => {
         <Link href={`/product/${item.id}`}>
           <div className="relative w-[70px] aspect-square">
             <Image
+              className="object-contain"
               src={item.selectedImage.image}
               alt={item.name}
               fill
-              className="object-contain"
+              sizes="100vw" // Add this line
             />
           </div>
         </Link>

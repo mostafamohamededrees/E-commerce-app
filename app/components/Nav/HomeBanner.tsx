@@ -23,6 +23,7 @@ export default function HomeBanner() {
             width={500} // specify the width
             height={300} // specify the height
             className="object-contain"
+            sizes="100vw" // Add this line
           />
         </div>
       </div>

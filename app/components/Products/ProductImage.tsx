@@ -36,22 +36,24 @@ const ProductImage: React.FC<ProductImageProps> = ({
             }`}
             >
               <Image
+                className="object-contain "
                 src={image.image}
                 alt={image.color}
                 fill
-                className="object-contain "
-              />
+                sizes="100vw" // Add this line
+                />
             </div>
           );
         })}
       </div>
       <div className="aspect-square relative col-span-5">
         <Image
+          className="object-contain w-full h-full max-h-[500px] min-h-[300px]  sm:min-h-[400px] "
           src={cartProduct.selectedImage.image}
           alt={cartProduct.selectedImage.color}
           fill
-          className="object-contain w-full h-full max-h-[500px] min-h-[300px]  sm:min-h-[400px] "
-        />
+          sizes="100vw" // Add this line
+          />
       </div>
     </div>
   );
