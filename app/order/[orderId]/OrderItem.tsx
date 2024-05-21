@@ -17,6 +17,8 @@ const OrderItem: React.FC<OrderItemProps> = ({ item }) => {
             className="object-contain"
             src={item.selectedImage.image}
             alt={item.name}
+            width={70}
+            height={70}
             sizes="100vw" // Add this line
             />
         </div>
