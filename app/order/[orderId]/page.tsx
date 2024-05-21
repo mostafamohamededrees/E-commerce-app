@@ -10,7 +10,6 @@ interface IPrams {
 
 const Order = async ({ params }: { params: IPrams }) => {
   const order = await getOrderById(params);
-  const searchParams = useSearchParams()
 
 
   if (!order) {

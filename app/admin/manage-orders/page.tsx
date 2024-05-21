@@ -10,7 +10,6 @@ import { useSearchParams } from "next/navigation";
 const ManageOrders = async () => {
   const orders = await getOrders();
   const currentUser = await getCurrentUser();
-  const searchParams = useSearchParams()
 
 
   if (!currentUser || currentUser.role !== "ADMIN") {

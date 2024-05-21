@@ -7,7 +7,6 @@ import { useSearchParams } from "next/navigation";
 
 const Login = async () => {
   const currentUser = await getCurrentUser();
-  const searchParams = useSearchParams()
 
   return (
     <Container>

@@ -5,7 +5,6 @@ import CheckoutClient from "./CheckoutClient";
 import { useSearchParams } from "next/navigation";
 
 const Checkout = () => {
-  const searchParams = useSearchParams()
   
 
   return (

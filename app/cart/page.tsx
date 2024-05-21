@@ -6,7 +6,6 @@ import { useSearchParams } from "next/navigation";
 
 const Cart = async () => {
   const currentUser = await getCurrentUser();
-  const searchParams = useSearchParams()
 
 
   return (

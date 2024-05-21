@@ -9,7 +9,6 @@ import { useSearchParams } from "next/navigation";
 
 const Orders = async () => {
   const currentUser = await getCurrentUser();
-  const searchParams = useSearchParams()
 
 
   if (!currentUser) {
