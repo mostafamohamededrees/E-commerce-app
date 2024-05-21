@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import Image from "next/legacy/image";
 import {
   CartProductType,
   SelectedImageType,
@@ -39,7 +39,6 @@ const ProductImage: React.FC<ProductImageProps> = ({
                 className="object-contain "
                 src={image.image}
                 alt={image.color}
-                fill
                 sizes="100vw" // Add this line
                 />
             </div>
@@ -51,7 +50,6 @@ const ProductImage: React.FC<ProductImageProps> = ({
           className="object-contain w-full h-full max-h-[500px] min-h-[300px]  sm:min-h-[400px] "
           src={cartProduct.selectedImage.image}
           alt={cartProduct.selectedImage.color}
-          fill
           sizes="100vw" // Add this line
           />
       </div>

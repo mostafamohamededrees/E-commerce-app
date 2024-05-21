@@ -1,5 +1,5 @@
 import React from "react";
-import Image from "next/image";
+import Image from "next/legacy/image";
 
 export default function HomeBanner() {
   return (
@@ -20,10 +20,10 @@ export default function HomeBanner() {
           <Image
             src="/banner-image.png"
             alt="banner"
-            width={500} // specify the width
-            height={300} // specify the height
+            width={500} 
+            height={300} 
             className="object-contain"
-            sizes="100vw" // Add this line
+            sizes="100vw"
           />
         </div>
       </div>

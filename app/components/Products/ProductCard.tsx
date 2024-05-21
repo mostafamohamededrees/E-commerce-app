@@ -3,7 +3,7 @@
 import { formatPrice } from "@/utils/FormatPrice";
 import truncateText from "@/utils/TrunkateText";
 import { Rating } from "@mui/material";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import { useRouter } from "next/navigation";
 
 interface ProductCardProps {
@@ -33,7 +33,8 @@ const ProductCard: React.FC<ProductCardProps> = ({ data }) => {
             className="w-full h-full object-contain"
             src={data.images[0].image}
             alt={data.name}
-            fill
+            width={200}
+            height={200}
             objectFit="contain"
             sizes="100vw" // Add this line
           />

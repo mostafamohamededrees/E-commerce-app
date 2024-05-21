@@ -3,7 +3,7 @@ import { formatPrice } from "@/utils/FormatPrice";
 import { CartProductType } from "../product/[productId]/ProductDetails";
 import Link from "next/link";
 import truncateText from "@/utils/TrunkateText";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import SetQuentity from "../components/Products/SetQuentity";
 import { useCart } from "@/hooks/useCart";
 
@@ -27,7 +27,8 @@ const ItemContent: React.FC<ItemContentProps> = ({ item }) => {
               className="object-contain"
               src={item.selectedImage.image}
               alt={item.name}
-              fill
+              width={70}
+              height={70}
               sizes="100vw" // Add this line
             />
           </div>

@@ -3,7 +3,7 @@
 import { formatPrice } from "@/utils/FormatPrice";
 import truncateText from "@/utils/TrunkateText";
 import { CartProductType } from "@prisma/client";
-import Image from "next/image";
+import Image from "next/legacy/image";
 
 interface OrderItemProps {
   item: CartProductType;
@@ -17,7 +17,6 @@ const OrderItem: React.FC<OrderItemProps> = ({ item }) => {
             className="object-contain"
             src={item.selectedImage.image}
             alt={item.name}
-            fill
             sizes="100vw" // Add this line
             />
         </div>
