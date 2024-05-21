@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import Container from "../components/Container";
 import FormWrap from "../components/FormWrap";
 import CheckoutClient from "./CheckoutClient";
@@ -7,7 +8,9 @@ const Checkout = () => {
     <div className="p-8">
       <Container>
         <FormWrap>
-          <CheckoutClient />
+          <Suspense fallback={<p>Loading...</p>}>
+            <CheckoutClient />
+          </Suspense>
         </FormWrap>
       </Container>
     </div>

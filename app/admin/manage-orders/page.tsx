@@ -4,6 +4,7 @@ import { getCurrentUser } from "@/actions/getCurrentUser";
 import NullData from "@/app/components/NullData";
 import getOrders from "@/actions/getOrders";
 import ManageOrdersClient from "./ManageOrdersClient";
+import { Suspense } from "react";
 
 const ManageOrders = async () => {
   const orders = await getOrders();
@@ -16,7 +17,9 @@ const ManageOrders = async () => {
   return (
     <div className="pt-8 ">
       <Container>
-        <ManageOrdersClient orders={orders} />
+        <Suspense fallback={<p>Loading...</p>}>
+          <ManageOrdersClient orders={orders} />
+        </Suspense>
       </Container>
     </div>
   );
