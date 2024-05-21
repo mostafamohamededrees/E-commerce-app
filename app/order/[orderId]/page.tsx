@@ -2,7 +2,6 @@ import Container from "@/app/components/Container";
 import OrderDetails from "./OrderDetails";
 import { getOrderById } from "@/actions/getOrderById";
 import NullData from "@/app/components/NullData";
-import { useSearchParams } from "next/navigation";
 
 interface IPrams {
   orderId?: string;

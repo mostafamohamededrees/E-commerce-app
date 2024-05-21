@@ -21,7 +21,7 @@ import {
   getDownloadURL,
 } from "firebase/storage";
 import axios from "axios";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 export type ImageType = {
   color: string;
@@ -36,7 +36,6 @@ export type UploadedImageType = {
 };
 
 const AddProductForm = () => {
-  const searchParams = useSearchParams()
 
 
   const router = useRouter();

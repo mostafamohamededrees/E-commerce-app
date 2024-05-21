@@ -5,7 +5,6 @@ import { useEffect, useState } from "react";
 import Heading from "../components/Heading";
 import { formatPrice } from "@/utils/FormatPrice";
 import { formatNumber } from "@/utils/formatNumber";
-import { useSearchParams } from "next/navigation";
 
 interface SummaryProps {
   orders: Order[];
@@ -19,7 +18,6 @@ type SummaryDataType = {
   };
 };
 const Summary: React.FC<SummaryProps> = ({ orders, products, users }) => {
-  const searchParams = useSearchParams()
 
 
   const [summaryData, setSummaryData] = useState<SummaryDataType>({

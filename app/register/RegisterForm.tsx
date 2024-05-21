@@ -14,14 +14,13 @@ import { AiOutlineGoogle } from "react-icons/ai";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { signIn } from "next-auth/react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { SafeUser } from "@/types";
 
 interface LoginFormProps {
   currentUser?: SafeUser | null;
 }
 const RegisterForm: React.FC<LoginFormProps> = ({ currentUser }) => {
-  const searchParams = useSearchParams()
 
   const [isLoading, setIsLoading] = useState(false);
   const {

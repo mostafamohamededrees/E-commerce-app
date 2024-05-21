@@ -10,7 +10,6 @@ import {
   Legend,
   scales,
 } from "chart.js";
-import { useSearchParams } from "next/navigation";
 import { Bar } from "react-chartjs-2";
 
 ChartJS.register(
@@ -32,7 +31,6 @@ type GraphData = {
 };
 
 const BarGraph: React.FC<BarGraphProps> = ({ data }) => {
-  const searchParams = useSearchParams()
 
   const labels = data.map((item) => item.day);
   const amounts = data.map((item) => item.totalAmount);

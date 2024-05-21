@@ -12,7 +12,6 @@ import {
 import { Elements } from "@stripe/react-stripe-js";
 import CheckoutForm from "./CheckoutForm";
 import Button from "../components/Button";
-import { useSearchParams } from "next/navigation";
 
 const stripePromise = loadStripe(
   process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY as string
@@ -33,7 +32,6 @@ const CheckoutClient = () => {
   const [paymentSuccess, setPaymentSuccess] = useState(false);
   const [paymentIntentCreated, setPaymentIntentCreated] = useState(false);
 
-  const searchParams = useSearchParams()
 
 
   // console.log("paymentIntent >>" + paymentIntent);

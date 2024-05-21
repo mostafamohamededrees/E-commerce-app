@@ -6,15 +6,12 @@ import truncateText from "@/utils/TrunkateText";
 import Image from "next/legacy/image";
 import SetQuentity from "../components/Products/SetQuentity";
 import { useCart } from "@/hooks/useCart";
-import { useSearchParams } from "next/navigation";
 
 interface ItemContentProps {
   item: CartProductType;
 }
 
 const ItemContent: React.FC<ItemContentProps> = ({ item }) => {
-  const searchParams = useSearchParams()
-
   const {
     handleRemoveProductFromCart,
     handleCartQtyIncrease,

@@ -16,9 +16,7 @@ const ManageProducts = async () => {
   return (
     <div className="pt-8 ">
       <Container>
-        <Suspense fallback={<p>Loading...</p>}>
           <ManageProductsClient products={products} />
-        </Suspense>
       </Container>
     </div>
   );

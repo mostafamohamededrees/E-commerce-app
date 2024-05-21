@@ -4,8 +4,6 @@ import { getCurrentUser } from "@/actions/getCurrentUser";
 import NullData from "@/app/components/NullData";
 import OrderClient from "./OrderClient";
 import getOrdersByUserId from "@/actions/getOrdersByUserId";
-import { Suspense } from "react";
-import { useSearchParams } from "next/navigation";
 
 const Orders = async () => {
   const currentUser = await getCurrentUser();
@@ -24,9 +22,7 @@ const Orders = async () => {
   return (
     <div className="pt-8 ">
       <Container>
-        <Suspense fallback={<p>Loading...</p>}>
           <OrderClient orders={orders} />
-        </Suspense>
       </Container>
     </div>
   );
