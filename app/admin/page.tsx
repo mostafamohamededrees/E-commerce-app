@@ -11,6 +11,7 @@ const Admin = async () => {
   const orders = await getOrders();
   const users = await getUsers();
   const graphData = await getGraphData();
+  
 
   return (
     <div className="pt-3">
