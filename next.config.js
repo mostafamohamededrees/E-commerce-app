@@ -7,6 +7,9 @@ const nextConfig = {
       "firebasestorage.googleapis.com",
     ],
   },
+  experimental: {
+    missingSuspenseWithCSRBailout: false,
+  },
 };
 
 module.exports = nextConfig;
