@@ -11,7 +11,7 @@ import {
   MdRemoveRedEye,
 } from "react-icons/md";
 import ActionBtn from "@/app/components/ActionBtn";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import moment from "moment";
 
 interface OrdersClientProps {
@@ -22,6 +22,8 @@ type ExtenedOrder = Order & {
 };
 
 const OrdersClient: React.FC<OrdersClientProps> = ({ orders }) => {
+  const searchParams = useSearchParams()
+
   const router = useRouter();
   let rows: any = [];
 

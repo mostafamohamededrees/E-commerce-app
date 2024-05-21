@@ -14,7 +14,7 @@ import ActionBtn from "@/app/components/ActionBtn";
 import { useCallback } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import moment from "moment";
 
 interface ManageOrdersClientProps {
@@ -25,6 +25,8 @@ type ExtenedOrder = Order & {
 };
 
 const ManageOrdersClient: React.FC<ManageOrdersClientProps> = ({ orders }) => {
+  const searchParams = useSearchParams()
+
   const router = useRouter();
   let rows: any = [];
 

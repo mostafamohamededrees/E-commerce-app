@@ -12,7 +12,7 @@ import Button from "../components/Button";
 import Link from "next/link";
 import { AiOutlineGoogle } from "react-icons/ai";
 import { signIn } from "next-auth/react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { toast } from "react-hot-toast";
 import { SafeUser } from "@/types";
 interface LoginFormProps {
@@ -20,6 +20,8 @@ interface LoginFormProps {
 }
 
 const LoginForm: React.FC<LoginFormProps> = ({ currentUser }) => {
+  const searchParams = useSearchParams()
+
   const [isLoading, setIsLoading] = useState(false);
   const {
     register,

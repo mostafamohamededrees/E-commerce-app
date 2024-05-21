@@ -36,6 +36,8 @@ export type UploadedImageType = {
 };
 
 const AddProductForm = () => {
+  const searchParams = useSearchParams()
+
 
   const router = useRouter();
 

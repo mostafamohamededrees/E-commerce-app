@@ -5,7 +5,7 @@ import Status from "@/app/components/Status";
 import { formatPrice } from "@/utils/FormatPrice";
 import { Order } from "@prisma/client";
 import moment from "moment";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { MdAccessTimeFilled, MdDeliveryDining, MdDone } from "react-icons/md";
 import OrderItem from "./OrderItem";
 
@@ -14,6 +14,8 @@ interface OrderDetailsProps {
 }
 
 const OrderDetails: React.FC<OrderDetailsProps> = ({ order }) => {
+  const searchParams = useSearchParams()
+
   return (
     <div className="max-w-[1150px] m-auto flex flex-col gap-2">
       <div className="mt-8">

@@ -5,10 +5,13 @@ import NullData from "@/app/components/NullData";
 import getOrders from "@/actions/getOrders";
 import ManageOrdersClient from "./ManageOrdersClient";
 import { Suspense } from "react";
+import { useSearchParams } from "next/navigation";
 
 const ManageOrders = async () => {
   const orders = await getOrders();
   const currentUser = await getCurrentUser();
+  const searchParams = useSearchParams()
+
 
   if (!currentUser || currentUser.role !== "ADMIN") {
     return <NullData title="Oops! Access Denied" />;

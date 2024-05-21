@@ -12,6 +12,7 @@ import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import Heading from "../components/Heading";
 import Button from "../components/Button";
+import { useSearchParams } from "next/navigation";
 
 interface CheckoutFormProps {
   clientSecret: string;
@@ -22,6 +23,8 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({
   clientSecret,
   handlePaymentSuccess,
 }) => {
+  const searchParams = useSearchParams()
+
   const { cartTotalAmount, handleSetPaymentIntent, handleClearCart } =
     useCart();
   const stripe = useStripe();

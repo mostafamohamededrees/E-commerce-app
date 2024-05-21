@@ -9,11 +9,14 @@ import { formatPrice } from "@/utils/FormatPrice";
 import toast from "react-hot-toast";
 import { SafeUser } from "@/types";
 import { useRouter } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 interface CartClientProps {
   currentUser?: SafeUser | null;
 }
 
 const CartClient: React.FC<CartClientProps> = ({ currentUser }) => {
+  const searchParams = useSearchParams()
+
   const router = useRouter();
   const { cartProducts, handleClearCart, cartTotalAmount } = useCart();
 

@@ -4,9 +4,12 @@ import AddProductForm from "./AddProductForm";
 import { getCurrentUser } from "@/actions/getCurrentUser";
 import NullData from "@/app/components/NullData";
 import { Suspense } from "react";
+import { useSearchParams } from "next/navigation";
 
 const AddProducts = async () => {
   const currentUser = await getCurrentUser();
+  const searchParams = useSearchParams()
+
 
   if (!currentUser || currentUser.role !== "ADMIN") {
     return <NullData title="Oops! Access Denied" />;

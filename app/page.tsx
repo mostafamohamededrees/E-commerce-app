@@ -5,6 +5,8 @@ import HomeBanner from "./components/Nav/HomeBanner";
 import ProductCard from "./components/Products/ProductCard";
 import getProducts, { IProductParams } from "@/actions/getProducts";
 import NullData from "./components/NullData";
+import { useSearchParams } from "next/navigation";
+import { Suspense } from "react";
 
 interface HomeProps {
   searchParams: IProductParams;
@@ -13,6 +15,8 @@ interface HomeProps {
 
 export default async function Home({ searchParams }: HomeProps) {
   const products = await getProducts(searchParams);
+
+
 
 
   if (products.length === 0) {
@@ -41,11 +45,13 @@ export default async function Home({ searchParams }: HomeProps) {
           <HomeBanner />
         </div>
       </Container>
+      <Suspense fallback={<p>Loading...</p>}>
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-8 ">
         {shuffledProducts.map((product: any) => {
           return <ProductCard key={product.id} data={product} />;
         })}
       </div>
+      </Suspense>
     </div>
   );
 }

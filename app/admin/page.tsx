@@ -6,12 +6,15 @@ import getUsers from "@/actions/getUsers";
 import getGraphData from "@/actions/getGraphData";
 import BarGraph from "./BarGraph";
 import { Suspense } from "react";
+import { useSearchParams } from "next/navigation";
 
 const Admin = async () => {
   const products = await getProducts({ category: null });
   const orders = await getOrders();
   const users = await getUsers();
   const graphData = await getGraphData();
+  const searchParams = useSearchParams()
+
 
   return (
     <div className="pt-3">

@@ -3,9 +3,12 @@ import Container from "../components/Container";
 import FormWrap from "../components/FormWrap";
 import LoginForm from "./LoginForm";
 import { Suspense } from "react";
+import { useSearchParams } from "next/navigation";
 
 const Login = async () => {
   const currentUser = await getCurrentUser();
+  const searchParams = useSearchParams()
+
   return (
     <Container>
       <FormWrap>

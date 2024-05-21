@@ -5,9 +5,12 @@ import NullData from "@/app/components/NullData";
 import OrderClient from "./OrderClient";
 import getOrdersByUserId from "@/actions/getOrdersByUserId";
 import { Suspense } from "react";
+import { useSearchParams } from "next/navigation";
 
 const Orders = async () => {
   const currentUser = await getCurrentUser();
+  const searchParams = useSearchParams()
+
 
   if (!currentUser) {
     return <NullData title="Oops! Access Denied" />;
