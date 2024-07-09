@@ -6,7 +6,6 @@ import {
   FieldValues,
   useForm,
   SubmitHandler,
-  UseFormRegister,
 } from "react-hook-form";
 import Button from "../components/Button";
 import Link from "next/link";

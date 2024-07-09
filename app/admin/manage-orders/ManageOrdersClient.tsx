@@ -25,6 +25,7 @@ type ExtenedOrder = Order & {
 };
 
 const ManageOrdersClient: React.FC<ManageOrdersClientProps> = ({ orders }) => {
+  console.log(orders);
 
   const router = useRouter();
   let rows: any = [];

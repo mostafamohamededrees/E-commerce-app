@@ -17,10 +17,13 @@ type SummaryDataType = {
     digit: number;
   };
 };
-const Summary: React.FC<SummaryProps> = ({ orders, products, users }) => {
-
-
+const Summary: React.FC<SummaryProps> = ({
+  orders,
+  products,
+  users,
+}) => {
   const [summaryData, setSummaryData] = useState<SummaryDataType>({
+
     sale: {
       label: "Total Sale",
       digit: 0,
@@ -95,7 +98,6 @@ const Summary: React.FC<SummaryProps> = ({ orders, products, users }) => {
                     <>{formatPrice(summaryData[key].digit)}</>
                   ) : (
                     <>{formatNumber(summaryData[key].digit)}</>
-                    
                   )}
                 </div>
                 <div className="text-lg">{summaryData[key].label}</div>
