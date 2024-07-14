@@ -1,5 +1,4 @@
 "use client";
-
 import Button from "@/app/components/Button";
 import ProductImage from "@/app/components/Products/ProductImage";
 import SetColor from "@/app/components/Products/SetColor";

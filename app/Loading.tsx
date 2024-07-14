@@ -1,12 +1,13 @@
+// components/Loading.js
 "use client";
 import React from "react";
-export default function Loading() {
+
+const Loading = () => {
   return (
-    <div className="flex space-x-2 justify-center items-center bg-white h-screen dark:invert">
-      <span className="sr-only">Loading...</span>
-      <div className="h-8 w-8 bg-black rounded-full animate-bounce [animation-delay:-0.3s]"></div>
-      <div className="h-8 w-8 bg-black rounded-full animate-bounce [animation-delay:-0.15s]"></div>
-      <div className="h-8 w-8 bg-black rounded-full animate-bounce"></div>
+    <div className="flex items-center justify-center min-h-screen bg-gray-100">
+      <div className="loader ease-linear rounded-full border-8 border-t-8 border-gray-200 h-32 w-32"></div>
     </div>
   );
-}
+};
+
+export default Loading;
