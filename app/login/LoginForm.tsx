@@ -2,11 +2,7 @@
 import { useEffect, useState } from "react";
 import Heading from "../components/Heading";
 import Input from "../components/Inputs/input";
-import {
-  FieldValues,
-  useForm,
-  SubmitHandler,
-} from "react-hook-form";
+import { FieldValues, useForm, SubmitHandler } from "react-hook-form";
 import Button from "../components/Button";
 import Link from "next/link";
 import { AiOutlineGoogle } from "react-icons/ai";
@@ -14,12 +10,12 @@ import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { toast } from "react-hot-toast";
 import { SafeUser } from "@/types";
+
 interface LoginFormProps {
   currentUser?: SafeUser | null;
 }
 
 const LoginForm: React.FC<LoginFormProps> = ({ currentUser }) => {
-
   const [isLoading, setIsLoading] = useState(false);
   const {
     register,
@@ -32,6 +28,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ currentUser }) => {
     },
   });
   const router = useRouter();
+
   useEffect(() => {
     if (currentUser) {
       router.push("/");
@@ -58,8 +55,9 @@ const LoginForm: React.FC<LoginFormProps> = ({ currentUser }) => {
   };
 
   if (currentUser) {
-    return <p>Logged in . Redirecting ...</p>;
+    return <p>Logged in. Redirecting...</p>;
   }
+
   return (
     <>
       <Heading title="Log in" />
@@ -72,14 +70,19 @@ const LoginForm: React.FC<LoginFormProps> = ({ currentUser }) => {
         }}
       />
       <hr className="bg-slate-300 w-full h-px" />
-
       <Input
         id="email"
         label="Email"
         disabled={isLoading}
         register={register}
         errors={errors}
-        required
+        validation={{
+          required: "Email is required",
+          pattern: {
+            value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
+            message: "Invalid email address",
+          },
+        }}
       />
       <Input
         id="password"
@@ -88,14 +91,15 @@ const LoginForm: React.FC<LoginFormProps> = ({ currentUser }) => {
         disabled={isLoading}
         register={register}
         errors={errors}
-        required
+        validation={{
+          required: "Password is required",
+        }}
       />
-
       <Button
-        label={isLoading ? "loading" : "Log in"}
+        label={isLoading ? "Loading" : "Log in"}
         onClick={handleSubmit(onSubmit)}
       />
-      <p className=" text-sm">
+      <p className="text-sm">
         Do not have an account?{" "}
         <Link href="/register" className="text-blue-500 underline">
           Sign up

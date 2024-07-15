@@ -1,5 +1,6 @@
 "use client";
 import { UseFormRegister, FieldValues, FieldErrors } from "react-hook-form";
+
 interface InputProps {
   id: string;
   label: string;
@@ -8,16 +9,21 @@ interface InputProps {
   disabled?: boolean;
   register: UseFormRegister<FieldValues>;
   errors: FieldErrors;
+  validation?: object; // Added validation prop
 }
+
 const Input: React.FC<InputProps> = ({
   id,
   label,
-  type,
+  type = "text",
   required,
   register,
   disabled,
   errors,
+  validation, // Added validation prop
 }) => {
+  const errorMessage = errors[id]?.message as string | undefined; // Extract the error message
+
   return (
     <div className="w-full relative">
       <input
@@ -26,7 +32,7 @@ const Input: React.FC<InputProps> = ({
         autoComplete="off"
         placeholder=""
         disabled={disabled}
-        {...register(id, { required })}
+        {...register(id, { required, ...validation })} // Spread validation rules
         className={`
         peer
         w-full
@@ -42,7 +48,7 @@ const Input: React.FC<InputProps> = ({
         disabled:cursor-not-allowed
         ${errors[id] ? "border-rose-500" : "border-slate-300"}
         ${errors[id] ? "focus:border-rose-500" : "focus:border-slate-300"}
-    `}
+      `}
       />
       <label
         className={`
@@ -64,6 +70,8 @@ const Input: React.FC<InputProps> = ({
       >
         {label}
       </label>
+      {errorMessage && <p className="text-rose-500">{errorMessage}</p>}{" "}
+      {/* Show error message */}
     </div>
   );
 };
