@@ -18,6 +18,7 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
   const toggleOpen = useCallback(() => {
     setIsOpen((prev) => !prev);
   }, []);
+
   return (
     <>
       <div className="relative z-30">
@@ -65,9 +66,11 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
                   <Link href="/orders" className="">
                     <MenuItem onClick={toggleOpen}>Your Orders</MenuItem>
                   </Link>
-                  <Link href="/admin" className="">
-                    <MenuItem onClick={toggleOpen}>Admin Dashbord</MenuItem>
-                  </Link>
+                  {currentUser.role === "ADMIN" && (
+                    <Link href="/admin" className="">
+                      <MenuItem onClick={toggleOpen}>Admin Dashboard</MenuItem>
+                    </Link>
+                  )}
                   <hr />
                   <MenuItem
                     onClick={() => {
