@@ -10,12 +10,8 @@ interface HomeProps {
   searchParams: IProductParams;
 }
 
-
 export default async function Home({ searchParams }: HomeProps) {
   const products = await getProducts(searchParams);
-
-
-
 
   if (products.length === 0) {
     return (
