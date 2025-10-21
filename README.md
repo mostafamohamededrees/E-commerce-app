@@ -1,34 +1,75 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 🛍️ TechShop – Full-Stack E-Commerce Platform
 
-## Getting Started
+**Live Demo:** [e-commerce-app-omega-pink.vercel.app](https://e-commerce-app-omega-pink.vercel.app/)  
+**GitHub Repo:** [github.com/mostafamohamededrees/E-commerce-app](https://github.com/mostafamohamededrees/E-commerce-app)
 
-First, run the development server:
+---
+
+## 📸 Preview
+> *(Add your screenshots here — e.g., Home Page, Product Page, Admin Dashboard...)*  
+> Example:
+> ![Home Page] <img width="1920" height="923" alt="Screenshot (198)" src="https://github.com/user-attachments/assets/0005b94a-fbe3-4fec-90be-ae1418372c42" />
+
+> ![Dashboard](screenshots/summary.png)
+> ![Product Page](/screenshots/product_page.png)
+> ![Payment](/screenshots/payment.png)
+> ![Add_Product](/screenshots/add_products.png)
+> ![Manage_Products](/screenshots/manage_products.png)
+> ![Manage_Orders](/screenshots/manage_orders.png)
+> 
+
+---
+
+## 🚀 Overview
+
+**TechShop** is a full-stack e-commerce platform for electronics built with **Next.js** and **MongoDB**, providing a smooth shopping experience for both users and admins.  
+It includes secure authentication, Stripe payment integration, product management, and a real-time admin dashboard.
+
+---
+
+## ✨ Features
+
+- 🔍 **Product Search & Category Filters** for easy navigation.  
+- 🔐 **Secure Authentication** using Email and Google.  
+- 💳 **Stripe Integration** for payments with order and status tracking.  
+- ⭐ **Verified Buyer Rating System** to ensure authentic feedback.  
+- 📦 **Order Tracking** (Dispatched / Delivered).  
+- 🧑‍💼 **Admin Dashboard** with live analytics, sales stats, and inventory management.  
+- ⚙️ **Role-Based Access Control** (admin-only dashboard).  
+- 🌐 **Randomized Product Display** on the homepage for dynamic UX.  
+- 📊 **Real-Time Charts** for sales and user insights using Chart.js.  
+
+---
+
+## 🧠 Tech Stack
+
+| Technology | Purpose |
+|-------------|----------|
+| **Next.js** | Core framework for SSR & routing |
+| **React.js** | Frontend UI and interactivity |
+| **TypeScript** | Type-safe JavaScript |
+| **Tailwind CSS** | Modern UI styling |
+| **React Hook Form** | Form handling and validation |
+| **Context API** | Global state management |
+| **Chart.js** | Data visualization in the dashboard |
+| **Stripe** | Payment processing |
+| **MongoDB + Prisma** | Database and ORM management |
+
+---
+
+## ⚙️ Installation & Setup
 
 ```bash
+# Clone the repository
+git clone https://github.com/mostafamohamededrees/E-commerce-app.git
+
+# Navigate to the project directory
+cd E-commerce-app
+
+# Install dependencies
+npm install
+
+# Create your .env file and fill in the required keys (see below)
+
+# Run the development server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
