@@ -6,14 +6,11 @@
 ---
 
 ## 📸 Preview
-> *(Add your screenshots here — e.g., Home Page, Product Page, Admin Dashboard...)*  
-> Example:
-> ![Home Page] <img width="1920" height="923" alt="Screenshot (198)" src="https://github.com/user-attachments/assets/0005b94a-fbe3-4fec-90be-ae1418372c42" />
-
-> ![Dashboard](screenshots/summary.png)
+> ![Home page](screenshots/Home_page.png)
+> ![Dashboard](screenshots/summary_page.png)
 > ![Product Page](/screenshots/product_page.png)
 > ![Payment](/screenshots/payment.png)
-> ![Add_Product](/screenshots/add_products.png)
+> ![Add_Product](/screenshots/add_product_page.png)
 > ![Manage_Products](/screenshots/manage_products.png)
 > ![Manage_Orders](/screenshots/manage_orders.png)
 > 
