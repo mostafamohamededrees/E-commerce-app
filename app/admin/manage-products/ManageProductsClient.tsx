@@ -18,8 +18,7 @@ import { useCallback } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
-import { deleteObject, getStorage, ref } from "firebase/storage";
-import firebaseApp from "@/libs/firebase";
+import supabase from "@/libs/supabase";
 
 interface ManageProductsClientProps {
   products: Product[];
@@ -29,7 +28,6 @@ const ManageProductsClient: React.FC<ManageProductsClientProps> = ({
   products,
 }) => {
   const router = useRouter();
-  const storge = getStorage(firebaseApp);
   let rows: any = [];
 
   if (products) {
@@ -132,35 +130,60 @@ const ManageProductsClient: React.FC<ManageProductsClientProps> = ({
   }, []);
 
   // delete product from manage products
-  const handleDelete = useCallback(async (id: string, images: any[]) => {
-    toast("Deleting product, please wait...");
-    const handleImageDelete = async () => {
-      try {
-        for (const item of images) {
-          if (item.image) {
-            const imageRef = ref(storge, item.image);
-            await deleteObject(imageRef);
-            console.log("image deleted", item.image);
-          }
+  const handleDelete = useCallback(
+    async (id: string, images: any[]) => {
+      toast("Deleting product, please wait...");
+
+      const handleImageDelete = async () => {
+        if (!supabase) {
+          console.warn("Supabase is not configured, skipping image deletion");
+          return;
         }
-      } catch (err) {
-        toast.error("deleteing image error");
-        console.log("deleteing images error", err);
-      }
-    };
 
-    await handleImageDelete();
+        try {
+          for (const item of images) {
+            if (item.image) {
+              // Extract the file path from the public URL
+              // Supabase public URLs look like: https://[project].supabase.co/storage/v1/object/public/e-shop/products/[filename]
+              const url = item.image;
+              const pathMatch = url.match(
+                /storage\/v1\/object\/public\/e-shop\/(.*)/,
+              );
+              const filePath = pathMatch ? pathMatch[1] : null;
 
-    axios
-      .delete(`/api/product/${id}`)
-      .then((res) => {
-        toast.success("Product deleted");
-        router.refresh();
-      })
-      .catch((err) => {
-        toast.error("Oops! Failed to delete product");
-      });
-  }, []);
+              if (filePath) {
+                const { error } = await supabase.storage
+                  .from("e-shop")
+                  .remove([filePath]);
+
+                if (error) {
+                  console.log("image deletion error", error);
+                } else {
+                  console.log("image deleted", filePath);
+                }
+              }
+            }
+          }
+        } catch (err) {
+          toast.error("Error deleting image");
+          console.log("Error deleting images", err);
+        }
+      };
+
+      await handleImageDelete();
+
+      axios
+        .delete(`/api/product/${id}`)
+        .then((res) => {
+          toast.success("Product deleted");
+          router.refresh();
+        })
+        .catch((err) => {
+          toast.error("Oops! Failed to delete product");
+        });
+    },
+    [router],
+  );
 
   return (
     <div className="max-w-[1150px] m-auto text-xl">

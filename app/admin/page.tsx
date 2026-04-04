@@ -6,14 +6,47 @@ import getUsers from "@/actions/getUsers";
 import getGraphData from "@/actions/getGraphData";
 import BarGraph from "./BarGraph";
 import { getCurrentUser } from "@/actions/getCurrentUser";
+import NullData from "../components/NullData";
 
 const Admin = async () => {
-  const users = await getUsers();
-  const orders = await getOrders();
-  const graphData = await getGraphData();
-  const products = await getProducts({ category: null });
+  const currentUser = await getCurrentUser();
 
+  if (!currentUser || currentUser.role !== "ADMIN") {
+    return <NullData title="Oops! Access Denied" />;
+  }
 
+  let users: any[] = [];
+  let orders: any[] = [];
+  let graphData: any[] = [];
+  let products: any[] = [];
+
+  try {
+    users = await getUsers();
+  } catch (error) {
+    console.error("Error fetching users:", error);
+    users = [];
+  }
+
+  try {
+    orders = await getOrders();
+  } catch (error) {
+    console.error("Error fetching orders:", error);
+    orders = [];
+  }
+
+  try {
+    graphData = await getGraphData();
+  } catch (error) {
+    console.error("Error fetching graph data:", error);
+    graphData = [];
+  }
+
+  try {
+    products = await getProducts({ category: null });
+  } catch (error) {
+    console.error("Error fetching products:", error);
+    products = [];
+  }
 
   return (
     <div className="pt-3">

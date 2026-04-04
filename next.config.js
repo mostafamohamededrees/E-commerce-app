@@ -4,7 +4,7 @@ const nextConfig = {
     domains: [
       "m.media-amazon.com",
       "lh3.googleusercontent.com",
-      "firebasestorage.googleapis.com",
+      "dhelokmblpwhlgxowiab.supabase.co",
     ],
   },
   experimental: {

@@ -7,19 +7,12 @@ import CustomCheckbox from "@/app/components/Inputs/CustomCheckbox";
 import SelectColor from "@/app/components/Inputs/SelectColor";
 import TextArea from "@/app/components/Inputs/TextArea";
 import Input from "@/app/components/Inputs/input";
-import firebaseApp from "@/libs/firebase";
+import supabase from "@/libs/supabase";
 import { categories } from "@/utils/Categories";
 import { colors } from "@/utils/Colors";
 import { useCallback, useEffect, useState } from "react";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
-
-import {
-  getStorage,
-  ref,
-  uploadBytesResumable,
-  getDownloadURL,
-} from "firebase/storage";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 
@@ -36,8 +29,6 @@ export type UploadedImageType = {
 };
 
 const AddProductForm = () => {
-
-
   const router = useRouter();
 
   const [isLoading, setIsLoading] = useState(false);
@@ -98,7 +89,7 @@ const AddProductForm = () => {
     setImages((prev) => {
       if (prev) {
         const filteredImages = prev.filter(
-          (item) => item.color !== value.color
+          (item) => item.color !== value.color,
         );
         return filteredImages;
       }
@@ -107,7 +98,7 @@ const AddProductForm = () => {
   }, []);
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    // upload images to firebase
+    // upload images to Supabase Storage
     // save product to mongoDB
     setIsLoading(true);
     let uploadedImages: UploadedImageType[] = [];
@@ -122,58 +113,49 @@ const AddProductForm = () => {
 
     const handleImageUploads = async () => {
       toast("Creating product, please wait...");
+
+      if (!supabase) {
+        setIsLoading(false);
+        return toast.error("Supabase is not configured");
+      }
+
       try {
         for (const item of data.images) {
           if (item.image) {
             // we need the file name uniquely for each image
             const fileName = new Date().getTime() + "-" + item.image.name;
-            const storge = getStorage(firebaseApp);
-            const storgeRef = ref(storge, `products/${fileName}`);
-            const uploadTask = uploadBytesResumable(storgeRef, item.image);
+            const filePath = `products/${fileName}`;
 
-            await new Promise<void>((resolve, reject) => {
-              uploadTask.on(
-                "state_changed",
-                (snapshot) => {
-                  const progress =
-                    (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-                  // console.log("Upload is " + progress + "% done");
-                  switch (snapshot.state) {
-                    case "paused":
-                      // console.log("Upload is paused");
-                      break;
-                    case "running":
-                      // console.log("Upload is running");
-                      break;
-                  }
-                },
-                (error) => {
-                  reject(error);
-                },
-                () => {
-                  // handle successful upload on complete
-                  getDownloadURL(uploadTask.snapshot.ref)
-                    .then((downloadURL) => {
-                      uploadedImages.push({
-                        ...item,
-                        image: downloadURL,
-                      });
-                      // console.log("file available at", downloadURL);
-                      resolve();
-                    })
-                    .catch((error) => {
-                      // console.log("error getting the download URL", error);
-                      reject(error);
-                    });
-                }
-              );
+            // Upload to Supabase Storage
+            const { data: uploadData, error: uploadError } =
+              await supabase.storage
+                .from("e-shop")
+                .upload(filePath, item.image, {
+                  cacheControl: "3600",
+                  upsert: false,
+                });
+
+            if (uploadError) {
+              console.error("Upload error details:", uploadError);
+              throw uploadError;
+            }
+
+            // Get the public URL for the uploaded file
+            const { data: urlData } = supabase.storage
+              .from("e-shop")
+              .getPublicUrl(filePath);
+
+            uploadedImages.push({
+              ...item,
+              image: urlData?.publicUrl || "",
             });
           }
         }
-      } catch (err) {
+      } catch (err: any) {
         setIsLoading(false);
-        // console.log("Error handling image uploads", err);
-        return toast.error("Error handling image uploads");
+        console.error("Error handling image uploads", err);
+        const errorMessage = err?.message || "Error handling image uploads";
+        return toast.error(errorMessage);
       }
     };
 

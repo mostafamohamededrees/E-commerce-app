@@ -13,6 +13,49 @@ export default async function getOrders() {
 
     return orders;
   } catch (error: any) {
-    throw new Error(error);
+    // If standard query fails due to corrupted data, try raw aggregation
+    console.log(
+      "Standard getOrders query failed, trying fallback...",
+      error.message,
+    );
+    try {
+      const orders = await prisma.order.aggregateRaw({
+        pipeline: [
+          {
+            $lookup: {
+              from: "User",
+              localField: "userId",
+              foreignField: "_id",
+              as: "user",
+            },
+          },
+          {
+            $unwind: {
+              path: "$user",
+              preserveNullAndEmptyArrays: true,
+            },
+          },
+          {
+            $addFields: {
+              "user.role": {
+                $cond: [
+                  { $in: ["$user.role", ["USER", "ADMIN"]] },
+                  "$user.role",
+                  "USER",
+                ],
+              },
+            },
+          },
+          {
+            $sort: { createDate: -1 },
+          },
+        ],
+      });
+
+      return orders as unknown as any[];
+    } catch (fallbackError) {
+      console.error("Fallback getOrders also failed:", fallbackError);
+      throw new Error("Failed to fetch orders");
+    }
   }
 }
